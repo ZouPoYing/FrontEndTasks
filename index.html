@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+
+    <style>
+
+        .box {
+        }
+
+        .head {
+            width: 100%;
+            height: 699px;
+            background-color: #2a80e7;
+        }
+
+        .input input {
+            width: 400px;
+            height: 60px;
+            margin-left: 20px;
+            border: 0px;
+            background-color: #2985ef;
+        }
+
+        .span2 {
+            width: 980px;
+            height: 30px;
+        }
+
+        .banner-recommend {
+            border-radius: 40px 40px 0 0;
+            box-shadow: 0 -2px 0 blue;
+            background-color: white;
+        }
+        
+        .banner {
+            height: 350px;
+            position: relative;
+            padding: 50px;
+        }
+
+        .banner img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .recommend {
+            padding-left: 100px;
+            padding-right: 100px;
+            display: flex;
+            justify-content: space-between;
+            flex: 1;
+        }
+
+        .recommend-item {
+            justify-content: center;
+        }
+
+        .recommend-item img {
+            width: 80px;
+            height: 80px;
+        }
+
+        .recommend-item-text {
+            padding-top: 10px;
+            padding-bottom: 30px;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .span {
+            width: 980px;
+            height: 30px;
+            background-color: #f8f8fa;
+        }
+
+        .hot-message {
+            background-color: white;
+        }
+        .hot-message div {
+            padding: 30px 30px 30px 0px;
+            font-size: 55px;
+            color: #454447;
+        }
+
+        .body {
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+
+        .line {
+            height: 1px;
+            background-color: black;
+        }
+
+        .message-item {
+            padding: 10px 0 10px 0;
+            height: 240px;
+        }
+
+        .left {
+            display: inline;
+            width: 600px;
+            float: left;
+            /*background-color: red;*/
+        }
+
+        .text-top {
+            width: 500px;
+            height: 38px;
+            padding: 40px 20px 40px 0;
+            font-size: 45px;
+            text-overflow: ellipsis;
+            overflow:hidden;
+            word-break:keep-all;
+            display: block;
+            white-space:nowrap;
+        }
+
+        .text-bottom {
+            padding: 40px 20px 40px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            color: gray;
+        }
+
+        .text-bottom-left {
+            flex: 1;
+            align-items: center;
+            font-size: 35px;
+        }
+
+        .text-bottom-right {
+            flex: 1;
+            align-items: center;
+            font-size: 35px;
+        }
+
+        .right {
+            display: inline;
+            float: right;
+            width: 300px;
+        }
+
+        .right img {
+            align-content: center;
+            width: 80%;
+            height: 80%;
+        }
+    </style>
+</head>
+
+<body>
+<div class="box">
+    <div class="head">
+        <div class="input">
+            <input type="text">
+        </div>
+        <div class="span2"></div>
+        <div class="banner-recommend">
+            <div class="banner">
+                <img src="img/banner.png">
+            </div>
+            <div class="recommend">
+                <div class="recommend-item">
+                    <img src="img/开门.png">
+                    <div class="recommend-item-text">开门</div>
+                </div>
+                <div class="recommend-item">
+                    <img src="img/水电缴费.png">
+                    <div class="recommend-item-text">缴费</div>
+                </div>
+                <div class="recommend-item">
+                    <img src="img/报修.png">
+                    <div class="recommend-item-text">报修</div>
+                </div>
+                <div class="recommend-item">
+                    <img src="img/投诉.png">
+                    <div class="recommend-item-text">投诉</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="span"></div>
+    <div class="body">
+        <div class="hot-message">
+            <div>热门资讯</div>
+        </div>
+        <!--<div class="line"></div>
+        <div class="message">
+            <div class="message-item">
+                <div class="left">
+                    <div class="text-top">公卫宣传资料电子版下载</div>
+                    <div class="text-bottom">
+                        <div class="text-bottom-left">2小时前发布</div>
+                        <div class="text-bottom-right">54人已阅读</div>
+                    </div>
+                </div>
+                <div class="right">
+                    <img src="img/pic1.png">
+                </div>
+            </div>
+        </div>-->
+        <div id="app">
+
+        </div>
+    </div>
+</div>
+<script src="js/jquery-3.0.0.min.js"></script>
+<script>
+    window.onload = function getonload(){
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "json/data.json",
+            async: false,
+            success: function (result) {
+                console.log(result);
+                var data = result.result;
+                console.log(data);
+                if(data.length > 0){   //项目列表
+                    var listInfo = "";
+                    for(var i=0;i<data.length;i++){
+                        listInfo += "<div class='line'></div>"+
+                        "<div class='message'>"+
+                        "<div class='message-item'>"+
+                        "<div class='left'>"+
+                        "<div class='text-top'>"+data[i].title+"</div>"+
+                        "<div class='text-bottom'>"+
+                        "<div class='text-bottom-left'>"+data[i].time+"</div>"+
+                        "<div class='text-bottom-right'>"+data[i].status_DISPLAY+"</div>"+
+                        "</div>"+
+                        "</div>"+
+                        "<div class='right'>"+
+                        "<img src='"+data[i].img+"'>"+
+                        "</div>"+
+                        "</div>"+
+                        "</div>";
+                    };
+                    $("#app").html(listInfo);
+                }
+            }
+        });
+    }
+
+
+</script>
+</body>
+</html>
